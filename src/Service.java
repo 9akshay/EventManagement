@@ -5,42 +5,46 @@ public class Service {
 	public int tax;
 	public int amount;
 	
-	Option op[];
-	Adon ao[];
+	Option OptionList[];
+	Adon AdonList[];
 	
-	Option opp;
-	Adon aon[];
+	Option option;
+	Adon adons[];
 	
 	public Service(String n, int p, int t,Option o[],Adon a[]) {
 		name = n;
 		price = p;
 		tax = t;
-		op = o;
-		ao = a;
+		OptionList = o;
+		AdonList = a;
 		amount = 0;
 	}
 	
-	public void bookService(Option o, Adon a[]){
-		
-		opp = o;
-		aon = a;
+	public int bookService(Option o, Adon a[]){
+		option = o;
+		adons = a;
+		return getTotalAmount();
+	}
+	
+	public int getTotalAmount(){
 		amount= amount + price;
-		amount= amount + o.price;
+		amount= amount + option.price;
 		
-		for(int i=0; i<aon.length; i++){
-			amount = amount + aon[i].price;
+		for(int i=0; i<adons.length; i++){
+			amount = amount + adons[i].price;
 		}
+		return amount;
 	}
 	
 	public void printBill(){
-		Debuger.Log("\nName : "+name);
-		Debuger.Log("\nPrice : "+price);
-		Debuger.Log("\nOption : "+opp.name);
-		Debuger.Log("\nOption : "+opp.price);
+		Debuger.Log("\n\t Service Name : "+name);
+		Debuger.Log("\n\t Service Price : "+price);
+		Debuger.Log("\n\t Service Option : "+option.name);
+		Debuger.Log("\n\t Service Option Price: "+option.price);
 		
-		for(int i=0; i<aon.length; i++){
-			Debuger.Log("\nAdon : "+aon[i].name+" Price : "+aon[i].price);
+		for(int i=0; i<adons.length; i++){
+			Debuger.Log("\n\t\t Adon : "+adons[i].name+" @Price : "+adons[i].price);
 		}
-		Debuger.Log("\nTotal : "+amount);
+		Debuger.Log("\n--------- Total : "+amount);
 	}
 }
